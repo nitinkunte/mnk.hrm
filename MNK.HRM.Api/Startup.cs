@@ -17,11 +17,11 @@ using AutoMapper;
 
 using MNK.HRM.Api.Data;
 using MNK.HRM.Api.Classes;
-using MNK.HRM.Security.Helpers;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using MNK.HRM.Security.Services;
+
 
 namespace MNK.HRM.Api
 {
@@ -44,8 +44,7 @@ namespace MNK.HRM.Api
             services.AddDbContext<IdentityContext>(options =>
                                                    options.UseSqlite(Configuration.GetConnectionString("IdentityConnection")));
 
-            services.AddDbContext<DataContext>(options =>
-                           options.UseSqlite(Configuration.GetConnectionString("IdentityConnection")));
+
 
             //add identity and create the db
             services.AddIdentityCore<ApplicationUser>(options => { });
@@ -80,8 +79,8 @@ namespace MNK.HRM.Api
                     OnTokenValidated = context =>
                     {
                         var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
-                        var userId = int.Parse(context.Principal.Identity.Name);
-                        var user = userService.GetById(userId);
+                        var userName = context.Principal.Identity.Name;
+                        var user = userService.GetByUserNameAsync(userName);
                         if (user == null)
                         {
                             // return unauthorized if user no longer exists

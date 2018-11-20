@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MNK.HRM.Api.Classes;
@@ -53,27 +54,33 @@ namespace MNK.HRM.Api.Controllers
         }
 
         [HttpPost("signIn")]
-        public async Task<string> SignIn([FromForm]string userName, string password)
+        [AllowAnonymous]
+        public async Task<string> SignIn([FromForm]string email, string password)
         {
+            string ret = string.Empty;
             try
             {
+               
+                var user = await _userManager.FindByEmailAsync(email);
 
-                //var result = await _signInManager
-                //if (result.Succeeded)
-                //{
-                //    //do something
-                //}
-                //else
-                //{
-                //    //do something
-                //}
-
+                if (null != user)
+                {
+                    Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
+                    if (result.Succeeded)
+                    {
+                        result.ToString();
+                    }
+                    else
+                    {
+                        ret = result.ToString();
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            return "true";
+            return ret;
         }
 
 

@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
     <Folder Include="Data\" />
     <Folder Include="Models\" />
     <Folder Include="Classes\" />
@@ -32,6 +31,6 @@
     <None Remove="lib\netcoreapp2.1\DataTables-Editor-Server.pdb" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MNK.HRM.Security\MNK.HRM.Security.csproj" />
+    <Compile Remove="Data\SecurityContext.cs" />
   </ItemGroup>
 </Project>
