@@ -79,7 +79,7 @@ namespace MNK.HRM.Api
                     OnTokenValidated = context =>
                     {
                         var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
-                        var userName = context.Principal.Identity.Name;
+                        var userName = context.Principal.Identity.Name; //for some reason this is returning TOKEN
                         var user = userService.GetByUserNameAsync(userName);
                         if (user == null)
                         {
