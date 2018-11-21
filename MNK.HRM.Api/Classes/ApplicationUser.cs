@@ -11,5 +11,6 @@ namespace MNK.HRM.Api.Classes
 
         public DateTime UpdateDate { get; set; }
         public string UpdateUser { get; set; }
+        public string Token { get; set; }
     }
 }

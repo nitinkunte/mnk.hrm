@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using MNK.HRM.Api.Data;
 
 namespace MNK.HRM.Api.Classes
@@ -23,12 +28,17 @@ namespace MNK.HRM.Api.Classes
         private IdentityContext _context;
         private UserManager<ApplicationUser> _userManager = null;
         private SignInManager<ApplicationUser> _signInManager = null;
+        private readonly AppSettings _appSettings;
 
-        public UserService(IdentityContext identityContext, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public UserService(IdentityContext identityContext, 
+                           UserManager<ApplicationUser> userManager, 
+                           SignInManager<ApplicationUser> signInManager,
+                           IOptions<AppSettings> appSettings)
         {
             _context = identityContext;
             _userManager = userManager;
             _signInManager = signInManager;
+            _appSettings = appSettings.Value;
         }
 
         #region Token Management
@@ -41,11 +51,25 @@ namespace MNK.HRM.Api.Classes
         {
             ApplicationUser ret = null;
             ApplicationUser user = await _userManager.FindByEmailAsync(userEmail);
+ 
             if (null != user)
             {
                 var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
                 if (result.Succeeded)
                 {
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+                    var tokenDescriptor = new SecurityTokenDescriptor
+                    {
+                        Subject = new ClaimsIdentity(new Claim[]
+                        {
+                            new Claim(ClaimTypes.Name, user.Id)
+                        }),
+                        Expires = DateTime.UtcNow.AddMinutes(2),
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                    };
+                    var token = tokenHandler.CreateToken(tokenDescriptor);
+                    user.Token = tokenHandler.WriteToken(token);
                     ret = user;
                 }
             }

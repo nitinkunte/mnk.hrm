@@ -2,7 +2,7 @@
 @{
 }
 <h2>Create User</h2>
-<form action="https://localhost:65201/api/identity/create" method="post">
+<form action="https://localhost:65201/api/identity/create" method="post" id="userForm">
     <table class="display" id="tbEmployees">
         <tr>
             <td>
@@ -38,14 +38,14 @@
         <tr>
             <td>
                 <button type="reset">Reset</button>
-                <button type="button" id="button" name="button">test</button>
+                <button type="button" id="test" name="test">test</button>
             </td>
             <td>
                 <button type="submit">Create</button>
             </td>
         </tr>
     </table>
-
+    <input type="text" id="jsd" />
 </form>
 
 @section Scripts {
@@ -53,11 +53,19 @@
 
 <script type="text/javascript" language="javascript">
     $(document).ready(function() {
-        $("#button").click(function(){
-    $.get("https://localhost:65201/api/identity/", function(data, status){
-        alert("Data: " + data + "\nStatus: " + status);
-            });
-        });
+
+
+
+        $("#test").click(function(){
+            var formData = $("#userForm").serialize();
+            $("#jsd").val(formData);
+
+            $.post("https://localhost:65201/api/identity/signIn2",
+                formData,
+                function(data, status){
+                alert("Data: " + data + "\nStatus: " + status);
+                    });
+                });
     });
 </script>
 

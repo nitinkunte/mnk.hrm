@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MNK.HRM.Api.Classes;
-
+using MNK.HRM.Api.Models;
 
 namespace MNK.HRM.Api.Controllers
 {
@@ -16,11 +16,15 @@ namespace MNK.HRM.Api.Controllers
     {
         private UserManager<ApplicationUser> _userManager = null;
         private SignInManager<ApplicationUser> _signInManager = null;
+        private IUserService _userService = null;
 
-        public IdentityController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public IdentityController(UserManager<ApplicationUser> userManager, 
+                                  SignInManager<ApplicationUser> signInManager,
+                                  IUserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _userService = userService;
         }
 
         [HttpPost("create")]
@@ -82,6 +86,49 @@ namespace MNK.HRM.Api.Controllers
             }
             return ret;
         }
+
+        [HttpPost("signIn2")]
+        [AllowAnonymous]
+        public async Task<JsonResult> SignIn2([FromBody] UserModel userModel)
+        {
+            ApplicationUser user = null;
+            try
+            {
+                user = await _userService.AuthenticateAsync(userModel.email, userModel.password);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return Json(user);
+        }
+
+
+        [HttpPost("signInOld")]
+        [AllowAnonymous]
+        public async Task<JsonResult> SignInOld([FromBody]string email, string password)
+        {
+            ApplicationUser user = null;
+            try
+            {
+                user = await _userService.AuthenticateAsync(email, password);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return Json(user);
+        }
+
+        [HttpGet("test")]
+        [Authorize]
+        public string Test()
+        {
+            return "success";
+        }
+
 
 
         [HttpGet("get")]
