@@ -8,6 +8,8 @@
     <Folder Include="Data\" />
     <Folder Include="Models\" />
     <Folder Include="Classes\" />
+    <Folder Include="Utils\" />
+    <Folder Include="Providers\" />
   </ItemGroup>
 
   <ItemGroup>

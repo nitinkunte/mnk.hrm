@@ -21,7 +21,8 @@ using MNK.HRM.Api.Classes;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-
+using MNK.HRM.Api.Models;
+using MNK.HRM.Api.Utils;
 
 namespace MNK.HRM.Api
 {
@@ -52,12 +53,16 @@ namespace MNK.HRM.Api
                                     .AddRoleManager<RoleManager<IdentityRole>>()
                                     .AddSignInManager<SignInManager<ApplicationUser>>()
                                     .AddEntityFrameworkStores<IdentityContext>();
+
             //services.AddIdentity<ApplicationUser, IdentityRole>()
             //.AddEntityFrameworkStores<IdentityContext>();
 
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddAutoMapper();
+
+            services.AddSingleton<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -67,11 +72,13 @@ namespace MNK.HRM.Api
             // configure jwt authentication
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
+
             .AddJwtBearer(x =>
             {
                 x.Events = new JwtBearerEvents
@@ -111,6 +118,7 @@ namespace MNK.HRM.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {

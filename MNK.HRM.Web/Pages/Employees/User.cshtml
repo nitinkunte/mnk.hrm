@@ -41,7 +41,8 @@
                 <button type="button" id="test" name="test">test</button>
             </td>
             <td>
-                <button type="submit">Create</button>
+                <button type="submit">Create-Old</button>
+                <button type="button" id="Create" name="Create">Create</button>
             </td>
         </tr>
     </table>
@@ -64,8 +65,21 @@
                 formData,
                 function(data, status){
                 alert("Data: " + data + "\nStatus: " + status);
-                    });
-                });
+            });
+        });
+
+        $("#Create").click(function(){
+            var formData = $("#userForm").serialize();
+            $("#jsd").val(formData);
+
+            $.post("https://localhost:65201/api/identity/signIn2",
+                formData,
+                function(data, status){
+                alert("Data: " + data + "\nStatus: " + status);
+            });
+        });
+
+
     });
 </script>
 

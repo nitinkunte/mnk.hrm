@@ -54,6 +54,7 @@ namespace MNK.HRM
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -64,7 +65,7 @@ namespace MNK.HRM
 
 
             //app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles(); //this will serve the CSS / Javascript and other static files
             app.UseCookiePolicy();
 
             app.UseCors(builder => builder

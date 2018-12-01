@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MNK.HRM.Api.Classes
+namespace MNK.HRM.Api.Utils
 {
     public class AppSettings
     {

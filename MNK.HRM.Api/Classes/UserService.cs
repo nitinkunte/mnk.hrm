@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MNK.HRM.Api.Data;
+using MNK.HRM.Api.Models;
+using MNK.HRM.Api.Utils;
 
 namespace MNK.HRM.Api.Classes
 {
@@ -57,7 +59,7 @@ namespace MNK.HRM.Api.Classes
                 var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
                 if (result.Succeeded)
                 {
-                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var jwtTokenHandler = new JwtSecurityTokenHandler();
                     var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
                     var tokenDescriptor = new SecurityTokenDescriptor
                     {
@@ -68,8 +70,8 @@ namespace MNK.HRM.Api.Classes
                         Expires = DateTime.UtcNow.AddMinutes(2),
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                     };
-                    var token = tokenHandler.CreateToken(tokenDescriptor);
-                    user.Token = tokenHandler.WriteToken(token);
+                    var token = jwtTokenHandler.CreateToken(tokenDescriptor);
+                    user.Token = jwtTokenHandler.WriteToken(token);
                     ret = user;
                 }
             }
@@ -93,12 +95,11 @@ namespace MNK.HRM.Api.Classes
             await _userManager.UpdateAsync(user);
         }
 
-        public async Task<ApplicationUser> GetByUserNameAsync(string userName)
+        public async Task<ApplicationUser> GetByUserNameAsync(string userId)
         {
-            ApplicationUser ret = null;
-
-            ret = await _userManager.FindByIdAsync(userName);
-            ret = await _userManager.FindByNameAsync(userName);
+            ApplicationUser ret = await _userManager.FindByIdAsync(userId);
+            bool userActive = await _signInManager.CanSignInAsync(ret);
+            if (!userActive) ret = null;
 
             return ret;
         }
