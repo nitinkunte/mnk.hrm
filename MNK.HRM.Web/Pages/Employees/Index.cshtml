@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 <h2>Employeess - Main</h2>
-<table class="display" id="tbEmployees">
+<table class="display" id="tbEmployees" class="hover">
     <thead>
         <tr>
             <th></th>
@@ -32,6 +32,86 @@
     </tfoot>
 </table>
 
+<div id="employeeDetails" style="display:none">
+
+    <div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab-Details" data-toggle="tab">Details</a>
+            </li>
+            <li>
+                <a href="#tab-Address" data-toggle="tab">Address</a>
+            </li>
+            <li>
+                <a href="#tab-Demographic" data-toggle="tab">Demographic</a>
+            </li>
+            <li>
+                <a href="#tab-Immigration" data-toggle="tab">Immigration</a>
+            </li>
+            <li>
+                <a href="#tab-JobDetail" data-toggle="tab">Job Details</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab-Details">
+                <dl>
+                    <dt>Prefix:</dt>
+                    <dd data-editor-field="Prefix"></dd>
+                    <dt>First Name:</dt>
+                    <dd data-editor-field="FirstName"></dd>
+                    <dt>Middle Name:</dt>
+                    <dd data-editor-field="MiddleName"></dd>
+                    <dt>Last Name:</dt>
+                    <dd data-editor-field="LastName"></dd>
+                    <dt>Suffix:</dt>
+                    <dd data-editor-field="Suffix"></dd>
+                    <dt>Employee Id:</dt>
+                    <dd data-editor-field="EmployeeId"></dd>
+                    <dt>Date of birth:</dt>
+                    <dd data-editor-field="DateOfBirth"></dd>
+
+                    <dd><button id="editDetails">Edit</button></dd>
+                </dl>
+            </div>
+            <div class="tab-pane" id="tab-Address">
+                <dl>
+                    <dt>Address Line 1:</dt>
+                    <dd data-editor-field="Address1"></dd>
+                    <dt>Address Line 2:</dt>
+                    <dd data-editor-field="Address2"></dd>
+                    <dt>City:</dt>
+                    <dd data-editor-field="City"></dd>
+                    <dt>State:</dt>
+                    <dd data-editor-field="State"></dd>
+                    <dt>ZipCode:</dt>
+                    <dd data-editor-field="ZipCode"></dd>
+                    <dt>Phone (Home):</dt>
+                    <dd data-editor-field="PhoneHome"></dd>
+                    <dt>Phone (Mobile):</dt>
+                    <dd data-editor-field="PhoneCell"></dd>
+                    <dt>Email (Personal):</dt>
+                    <dd data-editor-field="EmailPersonal"></dd>
+                    <dt>Email (Work):</dt>
+                    <dd data-editor-field="EmailWork"></dd>
+                    <dd><button id="editAddress">Edit</button></dd>
+                </dl>
+            </div>
+            <div class="tab-pane" id="tab-Demographic">
+
+            </div>            
+            <div class="tab-pane" id="tab-Immigration">
+
+            </div>            
+            <div class="tab-pane" id="tab-JobDetail">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
 @section cssSection{
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.4/css/buttons.dataTables.min.css">
@@ -39,36 +119,6 @@
 
     <link rel="stylesheet" type="text/css" href="~/lib/datatables/Editor-1.8.0/css/editor.dataTables.css">
 
-
-    @*
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.4/css/buttons.bootstrap4.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.7/css/select.bootstrap4.min.css">
-        <link rel="stylesheet" type="text/css" href="~/lib/datatables/Editor-1.8.0/css/editor.bootstrap.min.css">
-
-
-            <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">*
-            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.4/css/buttons.dataTables.min.css">
-            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.7/css/select.dataTables.min.css">
-            *<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/keytable/2.5.0/css/keyTable.dataTables.min.css">
-            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/autofill/2.3.2/css/autoFill.dataTables.min.css">*
-            <link href="~/lib/datatables/Editor-1.8.0/css/editor.dataTables.css" />
-            *<style type="text/css" class="init">
-
-                    div.DTE_Inline input {
-                        border: none;
-                        background-color: transparent;
-                        padding: 0 !important;
-                        font-size: 90%;
-                    }
-
-                        div.DTE_Inline input:focus {
-                            outline: none;
-                            background-color: transparent;
-                        }
-                </style>*@
 }
 
 @section Scripts {

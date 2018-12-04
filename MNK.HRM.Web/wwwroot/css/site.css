@@ -35,3 +35,39 @@ body {
         display: none;
     }
 }
+
+/* CSS used here will be applied after bootstrap.css */
+/* this will provide border to the tabs*/
+/* CSS used here will be applied after bootstrap.css */
+.tabbable {
+    margin: 30px;
+    height: 300px;
+    overflow: hidden;
+    border-bottom: 1px solid #d45500;
+}
+
+.nav-tabs {
+    margin: 0;
+    border-color: #d45500;
+}
+
+.tab-content {
+    padding: 30px;
+    height: 100%;
+    border-left: 1px solid #d45500;
+    border-right: 1px solid #d45500;
+}
+
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus {
+    border-color: #d45500;
+    border-bottom-color: transparent;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #d45500;
+}
+
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+        border-color: #d45500;
+        border-bottom-color: transparent;
+    }

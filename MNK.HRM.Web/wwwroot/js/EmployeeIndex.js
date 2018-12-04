@@ -1,5 +1,6 @@
 ﻿var editor; // use a global for the submit and return data rendering in the examples
-
+var table;
+var empId;
 
 $(document).ready(function() {
 
@@ -46,20 +47,12 @@ $(document).ready(function() {
                 type: "datetime" 
             }
         ]
-//         formOptions: {
-//                inline: {
-//                    onBlur: 'submit'
-//                }
-//            }
+
     } );
 
-    $('#tbEmployees').on( 'click', 'tbody td', function (e) {
-        editor.inline( this, {
-            submit: 'allIfChanged'
-        });
-    });
+
  
-    $('#tbEmployees').DataTable( {
+    table = $('#tbEmployees').DataTable( {
         dom: "Bfrtip",
         ajax: "https://localhost:65201/api/employees/get",
         columns: [
@@ -91,7 +84,7 @@ $(document).ready(function() {
         keys: {
             columns: ':not(:first-child)',
             editor:  editor,
-            editOnFocus: true
+            editOnFocus: false
         },
 
         //select: true,
@@ -108,6 +101,39 @@ $(document).ready(function() {
             { extend: "remove", editor: editor }
         ]
     } );
+
+//    $('#tbEmployees').on( 'click', 'tbody tr', function (e) {
+
+//        alert('hi');
+//        var data = table.row(this).data();
+//        alert('You clicked on ' + data[1] + '\s row');
+
+
+//        editor.inline( this, {
+//            submit: 'allIfChanged'
+//        });
+
+
+//    });
+
+    $('#tbEmployees tbody').on('click', 'tr', function () {
+
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+
+
+        empId = table.row(this).data();
+        //alert( 'You clicked on '+data.Id+'\'s row' );
+        $('#employeeDetails').show();
+    } );
+
+
+
 } );
 
 

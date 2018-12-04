@@ -14,15 +14,19 @@ namespace MNK.HRM.Web.Models
         public int Id { get; set; }
 
         [Required]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date, ErrorMessage = "Invalid Date")]
         [DisplayName("Start Date")]
         public DateTime DateStarted { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date, ErrorMessage = "Invalid Date")]
         [DisplayName("Termination Date")]
         public DateTime? DateTerminated { get; set; }
 
         [Required]
         [DisplayName("Pay Rate")]
+        [DataType(DataType.Currency, ErrorMessage = "Invalid pay rate")]
         public decimal PayRate { get; set; }
 
         [Required]

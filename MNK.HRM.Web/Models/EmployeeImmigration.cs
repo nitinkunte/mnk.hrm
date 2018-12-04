@@ -19,6 +19,8 @@ namespace MNK.HRM.Web.Models
         [NotMapped]
         public IEnumerable<SelectListItem> WorkAuthorizationTypes { get; set; }
 
+
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date, ErrorMessage = "Invalid Date")]
         [DisplayName("Work Authorization End Date")]
         public DateTime? DateOfExpiry { get; set; }

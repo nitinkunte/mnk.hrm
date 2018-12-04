@@ -36,6 +36,8 @@ namespace MNK.HRM.Web.Models
         [DisplayName("Employee Id")]
         public string EmployeeId { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Date of Birth")]
         public DateTime DateOfBirth { get; set; }
 
