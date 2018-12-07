@@ -54,7 +54,6 @@ namespace MNK.HRM.Web.Pages.Emp
         public async void OnGet(int Id)
         {
 
-            //Employee employeeDto = await _context.Employees.FirstOrDefaultAsync(x => x.Id == Id);
             EmployeeService service = new EmployeeService(_context);
             Employee employeeDto = await service.Get(Id);
             EmployeeModel employee;
@@ -85,18 +84,9 @@ namespace MNK.HRM.Web.Pages.Emp
             }
         }
 
-        [HttpPost]
-        public async void Save()
-        {
-            EmployeeModel employee = EmployeeDetail;
-            if (null != employee)
-            {
-                EmployeeService service = new EmployeeService(_context);
-                Employee employeeDto = _mapper.Map<Employee>(employee);
-                await service.Save(employeeDto);
-            }
-        }
 
+
+  
 
         /// <summary>
         /// Populates the enum and internal classes.
@@ -107,21 +97,7 @@ namespace MNK.HRM.Web.Pages.Emp
         {
             if (null != employee)
             {
-                employee.Prefixes = new List<SelectListItem>()
-                {
-//                    new SelectListItem(){ Text = "Please select ...", Value = ""},
-                    new SelectListItem(){ Text = "Mr.", Value = "Mr."},
-                    new SelectListItem(){ Text = "Ms.", Value = "Ms."},
-                    new SelectListItem(){ Text = "Mrs.", Value = "Mrs."},
-                    new SelectListItem(){ Text = "Dr.", Value = "Dr."},                
-                 };
 
-                employee.Suffixes = new List<SelectListItem>()
-                {
-                    new SelectListItem(){ Text = "Please select ...", Value = ""},
-                    new SelectListItem(){ Text = "Sr.", Value = "Sr."},
-                    new SelectListItem(){ Text = "Jr.", Value = "Jr."},
-                 };
 
                 if (null == employee.Address)
                 {

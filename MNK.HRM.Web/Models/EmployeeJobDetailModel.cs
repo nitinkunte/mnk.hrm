@@ -9,7 +9,20 @@ namespace MNK.HRM.Web.Models
 {
     public class EmployeeJobDetailModel
     {
+        public EmployeeJobDetailModel()
+        {
+            PayRateTypes = new List<SelectListItem>()
+                {
+                    new SelectListItem(){ Text = "Hourly", Value = "Hourly"},
+                    new SelectListItem(){ Text = "Yearly", Value = "Yearly"},
+                 };
 
+            JobTypes = new List<SelectListItem>()
+                {
+                    new SelectListItem(){ Text = "Full Time", Value = "Full Time"},
+                    new SelectListItem(){ Text = "Part Time", Value = "Part Time"},
+                 };
+        }
 
         public int Id { get; set; }
 

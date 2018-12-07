@@ -10,6 +10,19 @@ namespace MNK.HRM.Web.Models
     public class EmployeeImmigrationModel
     {
 
+        public EmployeeImmigrationModel()
+        {
+            WorkAuthorizationTypes = new List<SelectListItem>()
+                {
+                    new SelectListItem(){ Text = "Citizen", Value = "Citizen"},
+                    new SelectListItem(){ Text = "EAD", Value = "EAD"},
+                    new SelectListItem(){ Text = "Green Card", Value = "Green Card"},
+                    new SelectListItem(){ Text = "H1B", Value = "H1B"},
+                    new SelectListItem(){ Text = "L1", Value = "L1"},
+                    new SelectListItem(){ Text = "L2", Value = "L2"},
+                 };
+        }
+
         public int Id { get; set; }
 
         [Required]

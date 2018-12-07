@@ -10,6 +10,36 @@ namespace MNK.HRM.Web.Models
     public class EmployeeDemographicModel
     {
 
+        public EmployeeDemographicModel()
+        {
+            Ethnicities = new List<SelectListItem>()
+                {
+                    new SelectListItem(){ Text = "Hispanic", Value = "Hispanic"},
+                    new SelectListItem(){ Text = "Not Hispanic.", Value = "Not Hispanic"},
+                 };
+            Races = new List<SelectListItem>()
+                {
+                    new SelectListItem(){ Text = "American Indian", Value = "American Indian"},
+                    new SelectListItem(){ Text = "Asian", Value = "Asian"},
+                    new SelectListItem(){ Text = "Black", Value = "Black"},
+                    new SelectListItem(){ Text = "Other Pacific Islander", Value = "Other Pacific Islander"},
+                    new SelectListItem(){ Text = "White", Value = "White"},
+                 };
+
+            Genders = new List<SelectListItem>()
+                {
+                    new SelectListItem(){ Text = "Male", Value = "M"},
+                    new SelectListItem(){ Text = "Female", Value = "F"},
+                 };
+
+            MaritalStatuses = new List<SelectListItem>()
+                {
+                    new SelectListItem(){ Text = "Single", Value = "Single"},
+                    new SelectListItem(){ Text = "Married", Value = "Married"},
+                 };
+        }
+
+
         public int Id { get; set; }
 
         [Required]

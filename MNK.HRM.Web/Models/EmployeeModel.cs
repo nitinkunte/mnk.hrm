@@ -10,13 +10,29 @@ namespace MNK.HRM.Web.Models
     public class EmployeeModel
     {
 
+        public EmployeeModel()
+        {
+            Prefixes = new List<SelectListItem>()
+                {
+                    new SelectListItem(){ Text = "Mr.", Value = "Mr."},
+                    new SelectListItem(){ Text = "Ms.", Value = "Ms."},
+                    new SelectListItem(){ Text = "Mrs.", Value = "Mrs."},
+                    new SelectListItem(){ Text = "Dr.", Value = "Dr."},
+                 };
+
+            Suffixes = new List<SelectListItem>()
+                {
+                    new SelectListItem(){ Text = "Please select ...", Value = ""},
+                    new SelectListItem(){ Text = "Sr.", Value = "Sr."},
+                    new SelectListItem(){ Text = "Jr.", Value = "Jr."},
+                 };
+        }
+
         public int Id { get; set; }
 
         [DisplayName("Prefix")]
         public string Prefix { get; set; }
 
-        [NotMapped]
-        public IEnumerable<SelectListItem> Prefixes { get; set; }
 
         [DisplayName("First Name")]
         public string FirstName { get; set; }
@@ -30,8 +46,6 @@ namespace MNK.HRM.Web.Models
         [DisplayName("Suffix")]
         public string Suffix { get; set; }
 
-        [NotMapped]
-        public IEnumerable<SelectListItem> Suffixes { get; set; }
 
         [DisplayName("Employee Id")]
         public string EmployeeId { get; set; }
@@ -41,10 +55,12 @@ namespace MNK.HRM.Web.Models
         [DisplayName("Date of Birth")]
         public DateTime DateOfBirth { get; set; }
 
-        //public int AddressId { get; set; }
-        //public int JobDetailId { get; set; }
-        //public int DemographicId { get; set; }
-        //public int ImmigrationId { get; set; }
+        [NotMapped]
+        public IEnumerable<SelectListItem> Prefixes { get; set; }
+
+        [NotMapped]
+        public IEnumerable<SelectListItem> Suffixes { get; set; }
+
 
         public virtual EmployeeAddressModel Address { get; set; }
 

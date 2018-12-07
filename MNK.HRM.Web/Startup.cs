@@ -43,6 +43,7 @@ namespace MNK.HRM
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
             //services.Configure<MvcOptions>(options =>
             //{
             //    options.Filters.Add(new CorsAuthorizationFilterFactory("AllowMyOrigin"));
