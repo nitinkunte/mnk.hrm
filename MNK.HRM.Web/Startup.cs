@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using MNK.HRM.Web.Data;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using AutoMapper;
 
 namespace MNK.HRM
 {
@@ -46,6 +47,9 @@ namespace MNK.HRM
             //{
             //    options.Filters.Add(new CorsAuthorizationFilterFactory("AllowMyOrigin"));
             //});
+
+            services.AddAutoMapper();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

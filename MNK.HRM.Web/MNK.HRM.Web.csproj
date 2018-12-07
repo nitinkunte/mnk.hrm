@@ -10,6 +10,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +20,7 @@
     <Folder Include="Pages\Employees\" />
     <Folder Include="Pages\Emp\" />
     <Folder Include="Classes\" />
+    <Folder Include="DTO\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Classes\AutoMapperProfiles.json" />

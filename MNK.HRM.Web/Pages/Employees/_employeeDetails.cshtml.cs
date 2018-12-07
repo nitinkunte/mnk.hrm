@@ -14,9 +14,9 @@ namespace MNK.HRM.Web.Pages.Employees
 
 
         [HttpGet("{id}")]
-        public Employee GetEmployee(int id)
+        public EmployeeModel GetEmployee(int id)
         {
-            Employee ret = new Employee();
+            EmployeeModel ret = new EmployeeModel();
 
 
 

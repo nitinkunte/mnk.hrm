@@ -5,28 +5,22 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace MNK.HRM.Web.Models
+namespace MNK.HRM.Web.DTO
 {
+    [Table("EmployeeImmigration")]
     public class EmployeeImmigration
     {
         [ForeignKey("Employee")]
         public int Id { get; set; }
 
+        //public int EmployeeId { get; set; }
+
         [Required]
-        [DisplayName("Work Authorization")]
         public string WorkAuthorizationType { get; set; }
 
-        [NotMapped]
-        public IEnumerable<SelectListItem> WorkAuthorizationTypes { get; set; }
-
-
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [DataType(DataType.Date, ErrorMessage = "Invalid Date")]
-        [DisplayName("Work Authorization End Date")]
         public DateTime? DateOfExpiry { get; set; }
 
         [Required]
-        [DisplayName("USCIS Job Title")]
         public string JobTitle { get; set; }
 
     }

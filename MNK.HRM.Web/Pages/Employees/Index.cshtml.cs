@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -14,17 +15,25 @@ namespace MNK.HRM.Web.Pages.Employees
     public class IndexModel : PageModel
     {
         private readonly HRMContext _context;
+        private readonly IMapper _mapper;
 
-        public IndexModel(HRMContext context)
+        public IndexModel(HRMContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public IList<Employee> Employees { get; set; }
+        public IList<EmployeeModel> Employees { get; set; }
 
         public async Task OnGet()
         {
-            Employees = await _context.Employees.ToListAsync();
+            List<DTO.Employee> employeeDTOs = await _context.Employees.ToListAsync();
+            Employees = new List<EmployeeModel>();
+            foreach (var emp in employeeDTOs)
+            {
+                Employees.Add(_mapper.Map<EmployeeModel>(emp));
+            }
+
         }
 
 

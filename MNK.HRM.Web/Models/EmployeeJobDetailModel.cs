@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MNK.HRM.Web.Models
 {
-    public class EmployeeJobDetail
+    public class EmployeeJobDetailModel
     {
 
-        [ForeignKey("Employee")]
+
         public int Id { get; set; }
 
         [Required]
