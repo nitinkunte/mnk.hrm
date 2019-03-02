@@ -38,6 +38,9 @@ namespace MNK.HRM
             services.AddDbContext<HRMContext>(options => 
                                              options.UseSqlite(Configuration.GetConnectionString("HRMContext")));
 
+            services.AddDbContext<EmployeeContext>(options =>
+                                             options.UseSqlite(Configuration.GetConnectionString("EmployeeContext")));
+
             services.AddCors();
 
 
@@ -53,7 +56,13 @@ namespace MNK.HRM
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
+        /// <summary>
+        /// Configure the specified app and env.
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">App.</param>
+        /// <param name="env">Env.</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -79,11 +88,6 @@ namespace MNK.HRM
                             .AllowAnyHeader()
                             .AllowCredentials());
 
-            //app.UseCors(options => options
-            //.AllowAnyHeader()
-            //.AllowAnyOrigin()
-            //.AllowAnyMethod()
-            //);
             app.UseMvc();
         }
     }

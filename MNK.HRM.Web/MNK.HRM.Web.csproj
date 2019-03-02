@@ -25,4 +25,10 @@
   <ItemGroup>
     <Content Remove="Classes\AutoMapperProfiles.json" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="MnkHrm.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MNK.HRM.DTO\MNK.HRM.DTO.csproj" />
+  </ItemGroup>
 </Project>
